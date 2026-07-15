@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตั้งค่า</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="nav-wrap">
+    <div class="logo">MyPortfolio</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="about.html">เกี่ยวกับฉัน</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="portfolio.html">ผลงาน</a></li>
+        <li><a href="gallery.html">รูปภาพ</a></li>
+        <li><a href="contact.html">ติดต่อ</a></li>
+        <li><a href="settings.html" class="active">⚙️ ตั้งค่า</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <h2>ตั้งค่าเว็บไซต์</h2>
+
+    <!-- ธีมสี: 6 แบบ -->
+    <div class="setting-group">
+      <h3>ธีมสี</h3>
+      <div class="option-list" id="theme-options">
+        <div class="option-card" data-value="theme1" onclick="chooseTheme('theme1')">
+          <span class="theme-dot" style="background:#43637E"></span>ธีม 1
+        </div>
+        <div class="option-card" data-value="theme2" onclick="chooseTheme('theme2')">
+          <span class="theme-dot" style="background:#9FA1FF"></span>ธีม 2
+        </div>
+        <div class="option-card" data-value="theme3" onclick="chooseTheme('theme3')">
+          <span class="theme-dot" style="background:#F62440"></span>ธีม 3
+        </div>
+        <div class="option-card" data-value="theme4" onclick="chooseTheme('theme4')">
+          <span class="theme-dot" style="background:#FF6500"></span>ธีม 4
+        </div>
+        <div class="option-card" data-value="theme5" onclick="chooseTheme('theme5')">
+          <span class="theme-dot" style="background:#408A71"></span>ธีม 5
+        </div>
+        <div class="option-card" data-value="theme6" onclick="chooseTheme('theme6')">
+          <span class="theme-dot" style="background:#E37434"></span>ธีม 6
+        </div>
+        <div class="option-card" data-value="theme7" onclick="chooseTheme('theme7')">
+          <span class="theme-dot" style="background:#2563eb"></span>ธีม 7
+        </div>
+        <div class="option-card" data-value="theme8" onclick="chooseTheme('theme8')">
+          <span class="theme-dot" style="background:#16a34a"></span>ธีม 8
+        </div>
+        <div class="option-card" data-value="theme9" onclick="chooseTheme('theme9')">
+          <span class="theme-dot" style="background:#7c3aed"></span>ธีม 9
+        </div>
+        <div class="option-card" data-value="theme10" onclick="chooseTheme('theme10')">
+          <span class="theme-dot" style="background:#0f172a"></span>ธีม 10
+        </div>
+      </div>
+    </div>
+
+    <!-- ขนาดตัวหนังสือ -->
+    <div class="setting-group">
+      <h3>ขนาดตัวหนังสือ</h3>
+      <div class="option-list" id="fontsize-options">
+        <div class="option-card" data-value="small" onclick="chooseFontsize('small')">เล็ก (Small)</div>
+        <div class="option-card" data-value="medium" onclick="chooseFontsize('medium')">ปกติ (Medium)</div>
+        <div class="option-card" data-value="large" onclick="chooseFontsize('large')">ใหญ่ (Large)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer><p>&copy; 2026 MyPortfolio by Black_BARA. All rights reserved.</p></footer>
+
+<script src="js/main.js"></script>
+<script>
+  function markSelected(groupId, value) {
+    document.querySelectorAll('#' + groupId + ' .option-card').forEach(el => {
+      el.classList.toggle('selected', el.getAttribute('data-value') === value);
+    });
+  }
+  function chooseTheme(v)    { setSetting('theme', v);    markSelected('theme-options', v); }
+  function chooseFontsize(v) { setSetting('fontsize', v); markSelected('fontsize-options', v); }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    markSelected('theme-options', localStorage.getItem('site-theme') || 'theme1');
+    markSelected('fontsize-options', localStorage.getItem('site-fontsize') || 'medium');
+  });
+</script>
+</body>
+</html>
