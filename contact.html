@@ -25,25 +25,91 @@
 </header>
 
 <section>
-  <div class="container">
-    <h2>ติดต่อฉัน</h2>
-    <form action="#" method="post">
-      <div>
-        <label for="fname">ชื่อ-นามสกุล</label>
-        <input type="text" id="fname" name="fname" placeholder="กรอกชื่อของคุณ" required>
-      </div>
-      <div>
-        <label for="email">อีเมล</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-      </div>
-      <div>
-        <label for="message">ข้อความ</label>
-        <textarea id="message" name="message" placeholder="พิมพ์ข้อความของคุณที่นี่..." required></textarea>
-      </div>
-      <button type="submit">ส่งข้อความ</button>
-    </form>
+  <div class="container" style="max-width: 600px; margin: 50px auto; padding: 20px;">
+    <div class="card" style="padding: 30px;">
+      <h2 style="margin-bottom: 20px; text-align: center;">📥 ติดต่อฉัน</h2>
+      
+      <form id="contact-form" method="POST">
+        <!-- ใส่ Access Key ของคุณให้เรียบร้อยแล้วครับ -->
+        <input type="hidden" name="access_key" value="7c9404e9-ddb8-4bc0-aff3-2bbf60972e0f">
+        
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+        <div class="form-group">
+          <label for="name">ชื่อของคุณ</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="กรอกชื่อ-นามสกุล" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">อีเมลติดต่อกลับ</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">ข้อความของคุณ</label>
+          <textarea id="message" name="message" class="form-control" rows="5" placeholder="เขียนข้อความที่ต้องการติดต่อ..." required></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-submit">✈️ ส่งข้อความ</button>
+      </form>
+
+      <div id="form-result"></div>
+    </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const result = document.getElementById('form-result');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    submitBtn.disabled = true;
+    submitBtn.innerText = "กำลังส่งข้อความ...";
+    result.style.display = "block";
+    result.className = "";
+    result.innerHTML = "⌛ กำลังประมวลผล...";
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    window.fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let jsonRes = await response.json();
+            if (response.status == 200) {
+                result.className = "success";
+                result.innerHTML = "🎉 ส่งข้อความสำเร็จแล้ว! ฉันจะติดต่อกลับโดยเร็วที่สุด";
+                form.reset();
+            } else {
+                console.log(response);
+                result.className = "error";
+                result.innerHTML = "❌ เกิดข้อผิดพลาด: " + jsonRes.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.className = "error";
+            result.innerHTML = "❌ ไม่สามารถเชื่อมต่อระบบส่งอีเมลได้";
+        })
+        .then(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "✈️ ส่งข้อความ";
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 5000);
+        });
+  });
+</script>
 
 <footer><p>&copy; 2026 MyPortfolio by Black_BARA. All rights reserved.</p></footer>
 <script src="js/main.js"></script>
