@@ -1,0 +1,76 @@
+<%@ Page Language="C#" %>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="พอร์ตโฟลิโอสะสมผลงานวิชาพัฒนาซอฟต์แวร์ โดย Black_BARA - รวมผลงาน SDLC, SRS และ Windows Forms">
+<meta name="keywords" content="Black_BARA, Portfolio, พอร์ตโฟลิโอ, SDLC, SRS, C# Windows Forms">
+<meta name="author" content="Black_BARA">
+
+<meta property="og:title" content="MyPortfolio | Black_BARA">
+<meta property="og:description" content="รวมผลงานการศึกษาและการพัฒนาซอฟต์แวร์">
+<meta property="og:image" content="images/hw2/work-hw2_1.png"> <meta property="og:type" content="website">
+<title>หน้าแรก | เว็บไซต์ส่วนตัว</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">MyPortfolio</div>
+    <nav>
+      <ul>
+        <li><a href="index.aspx">หน้าแรก</a></li>
+        <li><a href="about.aspx">เกี่ยวกับฉัน</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="portfolio.html">ผลงาน</a></li>
+        <li><a href="gallery.html">รูปภาพ</a></li>
+        <li><a href="contact.aspx">ติดต่อ</a></li>
+        <li><a href="guestbook.aspx">📖 Guestbook</a></li>
+        <li><a href="settings.html">⚙️ ตั้งค่า</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>สวัสดีครับ ผมชื่อ นายอภิสิทธิ์ แป้นแหลม</h1>
+    <p>นักศึกษาสาขาวิศวกรรมคอมพิวเตอร์ สนใจการพัฒนาเว็บไซต์และงานออกแบบ UX/UI</p>
+  <a href="portfolio.html" class="btn">ดูผลงาน</a>
+</section>
+
+<section>
+  <div class="container">
+    <h2>เกี่ยวกับเว็บไซต์นี้</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>แนะนำตัว</h3>
+        <p>เว็บไซต์นี้จัดทำขึ้นเพื่อรวบรวมผลงานการบ้าน ประวัติส่วนตัว และช่องทางติดต่อ</p>
+      </div>
+      <div class="card">
+        <h3>ทักษะเด่น</h3>
+        <p>HTML, CSS, JavaScript, การออกแบบ UX/UI, Responsive Web Design</p>
+      </div>
+      <div class="card">
+        <h3>เป้าหมาย</h3>
+        <p>พัฒนาเว็บไซต์ที่ใช้งานง่าย สวยงาม และตอบโจทย์ผู้ใช้จริง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="card" style="text-align:center;">
+      <h3>ข้อมูลการเข้าชม (Dynamic Content)</h3>
+      <p>🕒 เวลาที่คุณเข้าชมหน้านี้: <b><%= DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") %></b></p>
+      <p>🌐 IP Address ของคุณ: <b><%= Request.UserHostAddress %></b></p>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2026 MyPortfolio by Black_BARA. All rights reserved.</p></footer>
+<script src="js/main.js"></script>
+</body>
+</html>
